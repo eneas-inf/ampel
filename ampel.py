@@ -29,14 +29,3 @@ class Ampel:
 
     def get_state(self) -> int:
         return self.state
-
-ampel1 = Ampel(pinRed=6, pinYellow=7, pinGreen=8)
-ampel2 = Ampel(pinRed=18, pinYellow=19, pinGreen=20)
-
-from time import sleep
-
-while(True):
-    for color in range(AmpelState.RED, AmpelState.OFF):
-        ampel1.set_state(color)
-        ampel2.set_state(color)
-        sleep(1)
