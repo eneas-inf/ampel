@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ampel-Steuerung</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding-top: 50px;
+        }
+        .ampel-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .licht {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            border: 2px solid #000;
+        }
+        /* Beispielhafte Farben für die Optik */
+        .rot { background-color: #ff0000; box-shadow: 0 0 20px #ff0000; }
+        .gelb { background-color: #ffcc00; }
+        .gruen { background-color: #00ff00; }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ampel-Steuerung</h2>
+
+    <div class="ampel-container">
+        <div class="licht rot"></div>
+        <div class="licht"></div>
+        <div class="licht"></div>
+    </div>
+
+    <div class="controls">
+        <form action="/fussgaenger" method="POST">
+            <button type="submit">Fußgänger kommt</button>
+        </form>
+
+        <form action="/auto" method="POST">
+            <button type="submit">Auto kommt</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 from ampel import Ampel, AmpelState
-from ui import connect_wifi
+from wlanwlan import connect_wifi
+from ui import start_webserver
 
 ssid = 'INF-LAB'
 password = 'INF-LAB@BBZW-2024'
@@ -12,6 +13,8 @@ ampel2 = Ampel(pinRed=18, pinYellow=19, pinGreen=20)
 
 from time import sleep
 import random
+
+start_webserver(port=80)
 
 while(True):
     ampel1.set_state(random.randint(AmpelState.RED, AmpelState.GREEN))
