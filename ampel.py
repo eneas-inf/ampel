@@ -5,6 +5,7 @@ class AmpelState:
     YELLOW = 2
     GREEN = 3
     OFF = 4
+    RED_YELLOW = 5
 
 class Ampel:
     def __init__(self, pinRed: int, pinYellow: int, pinGreen: int):
@@ -14,17 +15,21 @@ class Ampel:
         self.state = AmpelState.OFF
 
     def set_state(self, state: int):
-        pin = {
-            AmpelState.RED: self.pinRed,
-            AmpelState.YELLOW: self.pinYellow,
-            AmpelState.GREEN: self.pinGreen,
-            AmpelState.OFF: None
-        }[state]
-        for p in [self.pinRed, self.pinYellow, self.pinGreen]:
-            if p == pin:
-                p.on()
-            elif p:
-                p.off()
+        # Reset all first
+        self.pinRed.off()
+        self.pinYellow.off()
+        self.pinGreen.off()
+        
+        if state == AmpelState.RED:
+            self.pinRed.on()
+        elif state == AmpelState.YELLOW:
+            self.pinYellow.on()
+        elif state == AmpelState.GREEN:
+            self.pinGreen.on()
+        elif state == AmpelState.RED_YELLOW:
+            self.pinRed.on()
+            self.pinYellow.on()
+            
         self.state = state
 
     def get_state(self) -> int:
