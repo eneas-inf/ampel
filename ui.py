@@ -24,11 +24,31 @@ def start_webserver(port: int = 80):
             # Fehlerfreies Decoding
             data = req.decode('utf-8', 'ignore')
             
-            # Prüfung auf POST-Requests (passend zum HTML Formular)
-            if "POST /auto" in data:
-                print(">>> AUTO button pressed")
-            elif "POST /fussgaenger" in data:
-                print(">>> FUSSGAENGER button pressed")
+            # Request-Analyse und Logging
+            print("-" * 40)
+            lines = data.split('\r\n')
+            if len(lines) > 0:
+                request_line = lines[0]
+                print(f"Request: {request_line}")
+                
+                parts = request_line.split(' ')
+                if len(parts) >= 2:
+                    method = parts[0]
+                    path = parts[1]
+                    print(f"Method: {method}")
+                    print(f"Path: {path}")
+                    
+                    # Button-Press-Erkennung
+                    if method == 'POST':
+                        if path == '/auto':
+                            print(">>> LOG: AUTO button pressed (Request to /auto)")
+                        elif path == '/fussgaenger':
+                            print(">>> LOG: FUSSGAENGER button pressed (Request to /fussgaenger)")
+
+            # Volle Request-Informationen loggen
+            print("Full Request Data:")
+            print(data)
+            print("-" * 40)
             
             # HTML Antwort senden
             try:
